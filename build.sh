@@ -6,4 +6,9 @@ set -o errexit
 pip install -r requirements.txt
 
 # apply any database migrations that are outstanding
-python manage.py migrate
+python manage.py 
+
+#create Super User
+if [ -n "$DJANGO_SUPERUSER_EMAIL" ]; then
+	python manage.py createsuperuser --noinput
+fi
