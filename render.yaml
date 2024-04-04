@@ -3,7 +3,6 @@ databases:
     plan: free
     databaseName: foxglove_grc
     user: foxglove_grc-user
-    password: O8VO8tUR1naqnBztjdwCdziJwRp1Hb8v
 
 services:
   - type: web
