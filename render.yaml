@@ -1,0 +1,31 @@
+databases:
+  - name: foxglove_grc
+    plan: free
+    databaseName: foxglove_grc
+    user: foxglove_grc-user
+    password: O8VO8tUR1naqnBztjdwCdziJwRp1Hb8v
+
+services:
+  - type: web
+    plan: free
+    name: foxglove_grc-backend
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "python -m gunicorn ciso_assistant.wsgi:application -k uvicorn.workers.UvicornWorker" envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: foxglove_grc
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
+      - key: POSTGRES_NAME
+        value: foxglove_grc
+      - key: POSTGRES_USER
+        value: foxglove_grc_user
+      - key: POSTGRES_PASSWORD
+        value: O8VO8tUR1naqnBztjdwCdziJwRp1Hb8v
+      - key: DB_HOST
+        value: dpg-co740t6n7f5s738g3lrg-a
+  
