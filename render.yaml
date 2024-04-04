@@ -1,9 +1,3 @@
-databases:
-  - name: foxglove_grc
-    plan: free
-    databaseName: foxglove_grc
-    user: foxglove_grc-user
-
 services:
   - type: web
     plan: free
@@ -12,10 +6,6 @@ services:
     buildCommand: "./build.sh"
     startCommand: "python -m gunicorn ciso_assistant.wsgi:application -k uvicorn.workers.UvicornWorker" 
     envVars:
-      - key: DATABASE_URL
-        fromDatabase:
-          name: foxglove_grc
-          property: connectionString
       - key: SECRET_KEY
         generateValue: true
       - key: WEB_CONCURRENCY
